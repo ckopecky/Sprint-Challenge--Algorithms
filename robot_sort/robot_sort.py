@@ -48,6 +48,21 @@ class SortingRobot:
             return True
         else:
             return False
+    
+    def pickup_item(self):
+        """
+        If the robot is not holding an item, it picks up the item at its 
+        current location. If it is holding an item, swap the item it is 
+        holding with the item in front of it.
+        This will increment the time counter by 1.
+        """
+        if not self._item:
+            self._time += 1
+            self._item = self._list[self._position]
+            self._list[self._position] = None
+        else:
+            self.swap_item()
+
 
     def swap_item(self):
         """
@@ -96,8 +111,45 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        
+        '''
+
+            set up an loop that will break when the light turns on. 
+            implement bubble sort since the robot is able to move left and right and can swap items with things already in his hand. 
+
+
+
+        '''
+    def sort(self):
+        """
+        Sort the robot's list.
+        """
+        # Selection Sort solution
+        self.swap_item()
+        self.set_light_on()
+        
+        while self.light_is_on():
+            # move right and find the smallest item that has not been sorted
+            while self.move_right():
+                if self.compare_item() > 0:
+                    self.swap_item()
+            # if the robot is at the end of the list and all items are sorted, we're done
+            if self.compare_item() is None and self.can_move_right() is False:
+                # place the current item down in the list and turn light off to indicate the list is sorted
+                self.swap_item()
+                self.set_light_off()
+                break
+            else:
+                # find the spot in the list that is holding None
+                # place the item in that position
+                # move right and swap
+                while self.move_left():
+                    if self.compare_item() is None:
+                        self.swap_item()
+                        self.move_right()
+                        self.swap_item()
+                        break
+
 
 
 if __name__ == "__main__":
