@@ -115,7 +115,7 @@ class SortingRobot:
         '''
 
             set up an loop that will break when the light turns on. 
-            implement bubble sort since the robot is able to move left and right and can swap items with things already in his hand. 
+            implement selection sort. 
 
 
 
@@ -124,7 +124,6 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Selection Sort solution
         self.swap_item()
         self.set_light_on()
         
